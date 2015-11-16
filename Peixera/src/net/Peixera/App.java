@@ -6,29 +6,40 @@ import acm.program.GraphicsProgram;
 
 public class App extends GraphicsProgram {
 	private static final long serialVersionUID = 1L;
+	
+	// ANGLES DELS PEIXOS
+	
 	private static final int[] DIRECCIO = { 0, 90, 180, 270 };
+	
+	// AMPLADA DE LA APP
+	
+	private static final int AMPLADAPEIXERA = 800;
+	
+	// ALÇADA DE LA APP
+	
+	private static final int ALÇADAPEIXERA = 600;
+	
+	// PEIXOS QUE VOLS POSAR A LA APP
+	
+	private static final int PEIXICUS = 10;
 	Peixera Aigua;
 	Random Aleatori = new Random();
 
 	public void run() {
-		setSize(800, 600);
-		pause(50);
-
-		Aigua = new Peixera();
-
-		crearPeix();
-
-		Aigua.colocarPeix();
-
-		while (Aigua.finalitzar()) {
+		setSize(AMPLADAPEIXERA, ALÇADAPEIXERA);
 			pause(50);
-			Aigua.mouPeixos();
+		Aigua = new Peixera();
+		crearPeix();
+		Aigua.colocarPeix(AMPLADAPEIXERA, ALÇADAPEIXERA);
+		while (Aigua.finalitzar()) {
+				pause(50);
+			Aigua.mouPeixos(AMPLADAPEIXERA, ALÇADAPEIXERA);
 		}
 	}
 
 	public void crearPeix() {
 		GImage Peixicu;
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < PEIXICUS; i++) {
 			int AnglePeixicu = DIRECCIO[Aleatori.nextInt(DIRECCIO.length)];
 			int Sexe = Aleatori.nextInt(2);
 			Peixicu = new GImage("peix" + Sexe + "" + AnglePeixicu + ".png");
