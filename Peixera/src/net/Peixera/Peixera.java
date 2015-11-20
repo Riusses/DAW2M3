@@ -15,8 +15,17 @@ public class Peixera {
 
 	public void mouPeixos(int X, int Y) {
 		for (Peix P : Peixos) {
-			P.mou();
-			peixeraParet(P, X, Y);
+			if (!P.peixFregit()) {
+				P.mou();
+				peixeraParet(P, X, Y);
+				Peix Peixoca = peixosXoquen(P);
+				if (Peixoca != null) {
+					if (P.getSexe() == Peixoca.getSexe()) {
+						P.mortPeix();
+						Peixoca.mortPeix();
+					} //IF CRIEN (ELSE)
+				}
+			}
 		}
 	}
 
@@ -55,11 +64,16 @@ public class Peixera {
 
 	// PEIXOS XOQUEN
 
-	/*public void peixosXoquen(Peix P) {
-		if (P ){
-		//	
+	public Peix peixosXoquen(Peix P) {
+		for (Peix Peixot : Peixos) {
+			if (P != Peixot && !(Peixot.peixFregit())) {
+				if (P.xocaPeix(Peixot)) {
+					return Peixot;
+				}
+			}
 		}
-	}*/
+		return null;
+	}
 
 	// BUCLE INFINIT
 
